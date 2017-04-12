@@ -26,7 +26,7 @@
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 	<property name="securityManager" ref="securityManager" />
          <!-- 没有权限或者失败后跳转的页面 -->
-	 <property name="loginUrl" value="/login.jsp" /> 
+	<!--  <property name="loginUrl" value="/login.jsp" /> 
 	 <property name="successUrl" value="/WEB-INF/page/index.jsp" />
 	 <property name="unauthorizedUrl" value="/login/unauthorized" />
 		<property name="filterChainDefinitions">
@@ -35,7 +35,7 @@
 				/login/**=anon
 				/**=authc,rest
 			</value>
-		</property>
+		</property> -->
 	</bean>
 	<!-- 用户授权/认证信息Cache, 采用EhCache 缓存 -->
 	<bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
