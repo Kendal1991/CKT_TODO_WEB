@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+  <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ckt.ckttodo.pojo.MemberMapper">
+
+	<select id="getMemberByMemName" parameterType="String" resultType="com.ckt.ckttodo.pojo.Member">
+		select * from member where mem_name=#{mem_name}
+	</select>
+	<insert id="insertMember" parameterType="com.ckt.ckttodo.pojo.Member" useGeneratedKeys="true" keyProperty="mem_id">
+		insert into member (mem_id,mem_name,mem_passwd,mem_email,mem_level,token,token_create_time) values("+"NULL,'"+#{member}.getMem_name()+"','"+#{member}.getMem_password()+"','"+#{member}.getMem_email()+"','"+#{member}.getMem_level()+"',NULL,NULL")"
+	</insert>
+</mapper>

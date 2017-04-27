@@ -29,7 +29,7 @@ import com.ckt.ckttodo.pojo.MemberMapper;
 import com.ckt.ckttodo.sqldata.LoginServlet;
 
 @Controller
-public class LoginController {
+public class RegisterController {
 
 	/**
 	 * 登录
@@ -44,35 +44,31 @@ public class LoginController {
 	 * @return ModelAndView
 	 * @throws IOException 
 	 */
-	@RequestMapping("/login")
-	public ModelAndView member(HttpServletRequest request,
+	@RequestMapping("/register")
+	public ModelAndView execute(HttpServletRequest request,
 			HttpServletResponse response, String username, String password) throws IOException {
-		/*AbstractApplicationContext context = new ClassPathXmlApplicationContext("Member-conf.xml");
-	    Member member = context.getBean("member", Member.class);*/
-		System.out.println("login");
 		request.setCharacterEncoding("utf-8");
-		String mem_name = request.getParameter("mem_name");
-		String mem_pwd = request.getParameter("mem_pwd");
-
+		AbstractApplicationContext context = new ClassPathXmlApplicationContext("Member-conf.xml");
+	    Member member = context.getBean("member", Member.class);
+		member.setMem_name(request.getParameter("name"));
+		member.setMem_password(request.getParameter("pwd"));
+		member.setMem_email(request.getParameter("email"));
+		member.setMem_level(request.getParameter("level"));
+		request.getParameter("token");
 		Writer out = response.getWriter();
 		String resource = "configuration.xml";
 		InputStream is = LoginServlet.class.getClassLoader().getResourceAsStream(resource);
 		SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(is);
 		SqlSession session = sessionFactory.openSession();
 		MemberMapper memberMapper = session.getMapper(MemberMapper.class);
-		Member member= memberMapper.getMemberByMemName(mem_name);
-		if (member != null && member.getMem_password().equals(mem_pwd)) {
+//		String result =
+				memberMapper.insertMember(member);
+//		if (result.equals("1")) {
 			out.write("true");
-		} else {
-			out.write("false");
-		}
+//		} else {
+//			out.write("false");
+//		}
 	    return null;
 	}
 
-	// 退出
-	@RequestMapping("/logout")
-	public void logout() {
-		Subject subject = SecurityUtils.getSubject();
-		subject.logout();
-	}
 }

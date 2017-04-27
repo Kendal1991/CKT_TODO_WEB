@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="Member" type="com.ckt.ckttodo.pojo.Member" />
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<!-- 配置数据库连接信息 -->
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://10.120.1.135:3306/ckt_todo" />
+				<property name="username" value="root" />
+				<property name="password" value="zhan jing" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="com/ckt/ckttodo/pojo/memberMapper.xml"/>
+	</mappers>
+</configuration>
